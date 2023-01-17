@@ -17,6 +17,7 @@ func main() {
 		ctx.JSON(http.StatusOK, gin.H{"data": "hello world"})
 	})
 	r.GET("/books", controllers.FindBooks)
+	r.POST("/books", controllers.CreateBook)
 
 	r.Run()
 }
