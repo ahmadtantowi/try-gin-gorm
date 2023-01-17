@@ -1,0 +1,16 @@
+@host = http://localhost:8080
+@contentType = application/json
+
+###
+
+GET {{host}}/books
+
+###
+
+POST {{host}}/books
+Content-Type: {{contentType}}
+
+{
+    "title": "Start with Why",
+    "author": "Simon Sinek"
+}
