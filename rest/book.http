@@ -14,3 +14,7 @@ Content-Type: {{contentType}}
     "title": "Start with Why",
     "author": "Simon Sinek"
 }
+
+###
+
+GET {{host}}/books/1
