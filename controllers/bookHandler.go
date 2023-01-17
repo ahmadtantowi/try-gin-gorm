@@ -49,3 +49,33 @@ func FindBook(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusOK, gin.H{"data": book})
 }
+
+type UpdateBookInput struct {
+	Title  string `json:"title"`
+	Author string `json:"author"`
+}
+
+// update a book
+func UpdateBook(ctx *gin.Context) {
+	// find a book first
+	var book models.Book
+	if err := models.DB.Where("id=?", ctx.Param("id")).First(&book).Error; err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Record not found!"})
+		return
+	}
+
+	// validate input
+	var input UpdateBookInput
+	if err := ctx.ShouldBindJSON(&input); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	updateBook := models.Book{
+		Title:  input.Title,
+		Author: input.Author,
+	}
+	models.DB.Model(&book).Updates(&updateBook)
+
+	ctx.JSON(http.StatusOK, gin.H{"data": book})
+}

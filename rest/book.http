@@ -18,3 +18,12 @@ Content-Type: {{contentType}}
 ###
 
 GET {{host}}/books/1
+
+###
+
+PATCH {{host}}/books/1
+Content-Type: {{contentType}}
+
+{
+    "title": "The Infinity Game"
+}
